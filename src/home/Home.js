@@ -1,13 +1,15 @@
 import React from 'react';
 import { Link } from 'react-router-dom';
 import { Card } from 'react-bootstrap';
+import bee from '../bee.svg';
 import './Home.css';
 
 const Home = () => {
 
   return (
-    <div>
-      <h1>Bee Hired React Demo</h1>
+    <div className="d-flex flex-column justify-content-center align-items-center">
+      <h1>Tri-Bee-a React Demo</h1>
+      <img src={bee} className="logo" alt="logo" />
       <Card>
         <Card.Body>
           <Card.Text className="d-flex flex-column justify-content-center align-items-center">
