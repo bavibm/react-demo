@@ -9,12 +9,13 @@ const Upload = () => {
   const [answerThree, setAnswerThree] = useState('');
   const [answerFour, setAnswerFour] = useState('');
   const [correct, setCorrect] = useState(null);
+  const [submitting, setSubmitting] = useState(false);
 
   function handleInput(setState, e) {
     setState(e.target.value);
   }
 
-  function handleSubmit(e) {
+  async function handleSubmit(e) {
     e.preventDefault();
     let incorrectAnswerArray = [
       answerOne,
@@ -87,7 +88,7 @@ const Upload = () => {
                 onChange={e => setCorrect(answerFour)} />
             </InputGroup.Append>
           </InputGroup>
-          <Button type="submit" variant="primary">
+          <Button type="submit" variant="primary" disabled={submitting}>
             Upload
           </Button>
         </Form>
