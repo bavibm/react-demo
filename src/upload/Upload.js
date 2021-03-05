@@ -17,20 +17,30 @@ const Upload = () => {
 
   async function handleSubmit(e) {
     e.preventDefault();
-    let incorrectAnswerArray = [
-      answerOne,
-      answerTwo,
-      answerThree,
-      answerFour
-    ];
-    incorrectAnswerArray.splice(incorrectAnswerArray.indexOf(correct), 1);
-    uploadQuestion({
-      question: question,
-      correctAnswer: correct,
-      incorrectAnswer1: incorrectAnswerArray[0],
-      incorrectAnswer2: incorrectAnswerArray[1],
-      incorrectAnswer3: incorrectAnswerArray[2],
-    });
+    if (correct !== null) {
+      // correct answer must be selected
+      let incorrectAnswerArray = [
+        answerOne,
+        answerTwo,
+        answerThree,
+        answerFour
+      ];
+      incorrectAnswerArray.splice(incorrectAnswerArray.indexOf(correct), 1);
+      setSubmitting(true);
+      await uploadQuestion({
+        question: question,
+        correctAnswer: correct,
+        incorrectAnswer1: incorrectAnswerArray[0],
+        incorrectAnswer2: incorrectAnswerArray[1],
+        incorrectAnswer3: incorrectAnswerArray[2],
+      });
+      setQuestion('');
+      setAnswerOne('');
+      setAnswerTwo('');
+      setAnswerThree('');
+      setAnswerFour('');
+      setSubmitting(false);
+    }
   }
 
   return (
@@ -89,7 +99,7 @@ const Upload = () => {
             </InputGroup.Append>
           </InputGroup>
           <Button type="submit" variant="primary" disabled={submitting}>
-            Upload
+            {submitting ? 'Submitting...' : 'Upload'}
           </Button>
         </Form>
       </Card.Body>

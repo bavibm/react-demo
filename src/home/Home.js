@@ -6,14 +6,17 @@ import './Home.css';
 const Home = () => {
 
   return (
+    <div>
+      <h1>Bee Hired React Demo</h1>
     <Card>
       <Card.Body>
-        <Card.Text>
+        <Card.Text className="home">
           <Link to="/upload">Upload Question</Link>
           <Link to="/quiz">Take Quiz</Link>
         </Card.Text>
       </Card.Body>
     </Card>
+    </div>
   )
 }
 
