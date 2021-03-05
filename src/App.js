@@ -10,7 +10,7 @@ import {
 function App() {
   return (
     <Router>
-      <div className="App-header">
+      <div className="app d-flex justify-content-center align-items-center">
         <Switch>
           <Route path="/upload">
             <Upload />

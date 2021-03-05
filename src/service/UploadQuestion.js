@@ -10,7 +10,7 @@ export default async function uploadQuestion(body) {
         }
       },
     );
-    return response.json();
+    return await response.json();
   } catch (e) {
     console.log(e);
     return e;
