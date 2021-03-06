@@ -8,16 +8,18 @@ const Upload = () => {
   const [answerTwo, setAnswerTwo] = useState('');
   const [answerThree, setAnswerThree] = useState('');
   const [answerFour, setAnswerFour] = useState('');
-  const [correct, setCorrect] = useState(null);
+  // const [correct, setCorrect] = useState(null); // original implementation with string
+  const [correct, setCorrect] = useState(-1); // new implementation with index
   const [submitting, setSubmitting] = useState(false);
 
   function handleInput(setState, e) {
+    // extra parsing goes here
     setState(e.target.value);
   }
 
   async function handleSubmit(e) {
     e.preventDefault();
-    if (correct !== null) {
+    if (correct >= 0 && correct <= 3) {
       // correct answer must be selected
       let incorrectAnswerArray = [
         answerOne,
@@ -25,7 +27,8 @@ const Upload = () => {
         answerThree,
         answerFour
       ];
-      incorrectAnswerArray.splice(incorrectAnswerArray.indexOf(correct), 1);
+      // incorrectAnswerArray.splice(incorrectAnswerArray.indexOf(correct), 1); // original filter for correct answer
+      incorrectAnswerArray.splice(correct, 1);
       setSubmitting(true);
       await uploadQuestion({
         question: question,
@@ -64,7 +67,7 @@ const Upload = () => {
             />
             <InputGroup.Append>
               <InputGroup.Radio name="correctAnswer"
-                onChange={e => setCorrect(answerOne)}
+                onChange={e => setCorrect(0)}
               />
             </InputGroup.Append>
           </InputGroup>
@@ -75,7 +78,7 @@ const Upload = () => {
             />
             <InputGroup.Append>
               <InputGroup.Radio name="correctAnswer"
-                onChange={e => setCorrect(answerTwo)} />
+                onChange={e => setCorrect(1)} />
             </InputGroup.Append>
           </InputGroup>
           <InputGroup className="mb-3">
@@ -85,7 +88,7 @@ const Upload = () => {
             />
             <InputGroup.Append>
               <InputGroup.Radio name="correctAnswer"
-                onChange={e => setCorrect(answerThree)} />
+                onChange={e => setCorrect(2)} />
             </InputGroup.Append>
           </InputGroup>
           <InputGroup className="mb-3">
@@ -95,7 +98,7 @@ const Upload = () => {
             />
             <InputGroup.Append>
               <InputGroup.Radio name="correctAnswer"
-                onChange={e => setCorrect(answerFour)} />
+                onChange={e => setCorrect(3)} />
             </InputGroup.Append>
           </InputGroup>
           <Button type="submit" variant="primary" disabled={submitting}>
